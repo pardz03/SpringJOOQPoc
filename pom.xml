@@ -1,0 +1,143 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>SpringJOOQPoc</groupId>
+  <artifactId>SpringJOOQPoc</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>war</packaging>
+  
+  <properties>
+	 <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	 <java-version>1.8</java-version>
+	 <cglib-version>3.1</cglib-version>
+	 <io.spring.platform-version>2.0.1.RELEASE</io.spring.platform-version>
+ 	 <hikari.cp-version>2.3.12</hikari.cp-version>
+ 	 <jooq-version>3.8.4</jooq-version>
+ 	 <jooq-modelmapper-version>0.7.2</jooq-modelmapper-version>
+  </properties>
+  	
+  <dependencyManagement>
+      <dependencies>
+          <dependency>
+	          <groupId>io.spring.platform</groupId>
+	          <artifactId>platform-bom</artifactId>
+	          <version>${io.spring.platform-version}</version>
+	          <type>pom</type>
+	          <scope>import</scope>
+          </dependency>
+       </dependencies>
+  </dependencyManagement>
+  
+  <dependencies>
+  		<!-- unit testing -->
+       	<dependency>
+	      <groupId>junit</groupId>
+	      <artifactId>junit</artifactId>
+	      <scope>test</scope>
+	    </dependency>
+	    
+	    <!-- Dao Support -->
+	    <dependency>
+	        <groupId>org.springframework</groupId>
+	        <artifactId>spring-jdbc</artifactId>
+	    </dependency>
+        <!-- Spring -->
+	    
+        <!-- Spring -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+        </dependency>
+        <!-- Spring -->
+        
+		<!--for testing -->        
+        <dependency>
+		  <groupId>org.springframework</groupId>
+		  <artifactId>spring-test</artifactId>
+    	</dependency>  
+    	
+		<!-- postgres sql jar -->
+	    <dependency>
+	      <groupId>org.postgresql</groupId>
+	      <artifactId>postgresql</artifactId>
+	      <scope>compile</scope>
+	    </dependency>
+	    
+		<!-- for modelmapper and spring dependencies -->
+	    <dependency>
+		    <groupId>cglib</groupId>
+		    <artifactId>cglib</artifactId>
+		    <version>${cglib-version}</version>
+		</dependency>
+		
+	    <!-- Data Source Dependencies -->
+		<!-- Persistence connection pooling-->
+		<dependency>
+			<groupId>com.zaxxer</groupId>
+			<artifactId>HikariCP-java6</artifactId>
+			<version>${hikari.cp-version}</version>
+		</dependency>
+		
+		<!-- jooq orm -->
+		<dependency>
+		    <groupId>org.jooq</groupId>
+		    <artifactId>jooq</artifactId>
+		    <version>${jooq-version}</version>
+		</dependency>
+		<dependency>
+	  		<groupId>org.modelmapper.extensions</groupId>
+	  		<artifactId>modelmapper-jooq</artifactId>
+	  		<version>${jooq-modelmapper-version}</version>
+		</dependency>
+		
+		
+		<!-- LOGGING -->
+		<!-- Log4J -->
+		
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+		</dependency>		
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+		</dependency>
+  </dependencies>
+  
+  <build>
+    <testSourceDirectory>src/main/test</testSourceDirectory>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			
+			<plugin>
+                 <groupId>org.apache.tomcat.maven</groupId>
+                 <artifactId>tomcat7-maven-plugin</artifactId>
+                 <version>2.2</version>
+                     <configuration>
+                           <path>/SpringJOOQ</path>
+                           <port>81</port>
+                 </configuration>
+            </plugin>
+              
+           <plugin>
+               <groupId>org.apache.maven.plugins</groupId>
+               <artifactId>maven-compiler-plugin</artifactId>
+               <version>2.3.2</version>
+               <configuration>
+                   <source>${java-version}</source>
+                   <target>${java-version}</target>
+               </configuration>
+         </plugin>
+		</plugins>
+  </build>
+</project>
