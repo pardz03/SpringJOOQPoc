@@ -318,6 +318,7 @@
                 <!-- Include all tables found from the PUBLIC schema -->
                 <includes>tbl_image|tbl_imagedetails|tbl_imageinfo</includes>
                 <excludes></excludes>
+                <inputSchema>public</inputSchema>
             </database>
             <!-- Generate classes for tables and records -->
             <generate>

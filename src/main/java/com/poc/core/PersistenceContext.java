@@ -97,10 +97,10 @@ public class PersistenceContext {
         return new DataSourceConnectionProvider(transactionAwareDataSource());
     }
     
-/*	@Bean
+	@Bean
 	public TransactionProvider transactionProvider() {
 		return new SpringTransactionProvider();
-	}*/
+	}
 
     @Bean
     public JOOQToSpringExceptionTransformer jooqToSpringExceptionTransformer() {
