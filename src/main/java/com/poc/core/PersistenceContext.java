@@ -5,6 +5,7 @@ import java.util.Properties;
 import javax.sql.DataSource;
 
 import org.jooq.SQLDialect;
+import org.jooq.TransactionProvider;
 import org.jooq.conf.Settings;
 import org.jooq.impl.DataSourceConnectionProvider;
 import org.jooq.impl.DefaultConfiguration;
@@ -95,6 +96,11 @@ public class PersistenceContext {
     public DataSourceConnectionProvider connectionProvider() {
         return new DataSourceConnectionProvider(transactionAwareDataSource());
     }
+    
+/*	@Bean
+	public TransactionProvider transactionProvider() {
+		return new SpringTransactionProvider();
+	}*/
 
     @Bean
     public JOOQToSpringExceptionTransformer jooqToSpringExceptionTransformer() {

@@ -127,6 +127,13 @@
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-core</artifactId>
 		</dependency>
+		
+		<!-- servlet -->
+	   <dependency>
+          <groupId>javax.servlet</groupId>
+          <artifactId>javax.servlet-api</artifactId>
+          <scope>provided</scope>
+       </dependency>
   </dependencies>
   
   <!-- Profile configuration -->
@@ -350,6 +357,14 @@
                    <target>${java-version}</target>
                </configuration>
          </plugin>
+         
+         <plugin>            
+		  <groupId>org.apache.maven.plugins</groupId>
+		  <artifactId>maven-war-plugin</artifactId>
+		  <configuration>
+		    <webXml>WebContent\WEB-INF\web.xml</webXml>        
+		  </configuration>
+		</plugin>
          
 		</plugins>
   </build>
