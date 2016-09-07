@@ -33,11 +33,10 @@ import com.zaxxer.hikari.HikariDataSource;
 @EnableTransactionManagement
 @PropertySource("classpath:project.properties")
 public class PersistenceContext {
-	private static final String PROPERTY_NAME_DB_DRIVER = "db.driver";
     private static final String PROPERTY_NAME_DB_PASSWORD = "db.password";
-
-    private static final String PROPERTY_NAME_DB_URL = "db.url";
     private static final String PROPERTY_NAME_DB_USERNAME = "db.username";
+    private static final String PROPERTY_NAME_DB_URL = "db.url";
+    
     private static final String PROPERTY_NAME_DB_DATASOURCECLASSNAME = "db.dataSourceClassName";
     private static final String PROPERTY_NAME_JOOQ_SQL_DIALECT = "jooq.sql.dialect";
     
@@ -68,11 +67,6 @@ public class PersistenceContext {
 		   
 		HikariConfig hc = new HikariConfig(configProps);
 		HikariDataSource ds = new HikariDataSource(hc);
-		   
-		ds.setDriverClassName(env.getRequiredProperty(PROPERTY_NAME_DB_DRIVER));
-		ds.setJdbcUrl(env.getRequiredProperty(PROPERTY_NAME_DB_URL));
-		ds.setUsername(env.getRequiredProperty(PROPERTY_NAME_DB_USERNAME));
-		ds.setPassword(env.getRequiredProperty(PROPERTY_NAME_DB_PASSWORD));
 		    
 		ds.addDataSourceProperty("cachePrepStmts", true);
 		ds.addDataSourceProperty("prepStmtCacheSize", 250);
