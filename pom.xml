@@ -10,12 +10,12 @@
 	 <java-version>1.8</java-version>
 	 <cglib-version>3.1</cglib-version>
 	 <io.spring.platform-version>2.0.1.RELEASE</io.spring.platform-version>
- 	 <hikari.cp-version>2.3.12</hikari.cp-version>
  	 <jooq-version>3.8.4</jooq-version>
  	 <jooq-modelmapper-version>0.7.2</jooq-modelmapper-version>
  	 		<!-- BUILD PROPERTIES DEFINITION -->
 	 <build.profile.id>dev</build.profile.id>
 	 <skip.db.creation>true</skip.db.creation>
+	 <bone.cp-version>0.8.0.RELEASE</bone.cp-version>
 	 <jooq.generator.db.dialect>org.jooq.util.postgres.PostgresDatabase</jooq.generator.db.dialect>
 	 <!-- 		available dialects -->
 <!--            org.jooq.util.ase.ASEDatabase (to be used with Sybase ASE) -->
@@ -90,14 +90,14 @@
 		    <artifactId>cglib</artifactId>
 		    <version>${cglib-version}</version>
 		</dependency>
-		
-	    <!-- Data Source Dependencies -->
-		<!-- Persistence connection pooling-->
+
+		<!-- https://mvnrepository.com/artifact/com.jolbox/bonecp -->
 		<dependency>
-			<groupId>com.zaxxer</groupId>
-			<artifactId>HikariCP-java6</artifactId>
-			<version>${hikari.cp-version}</version>
+		    <groupId>com.jolbox</groupId>
+		    <artifactId>bonecp</artifactId>
+		    <version>${bone.cp-version}</version>
 		</dependency>
+
 		
 		<!-- jooq orm -->
 		<dependency>
@@ -126,6 +126,11 @@
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-core</artifactId>
+		</dependency>
+		
+		<dependency>
+		    <groupId>commons-logging</groupId>
+		    <artifactId>commons-logging</artifactId>
 		</dependency>
 		
 		<!-- servlet -->
@@ -316,7 +321,7 @@
                 <!-- Configure the used database dialect -->
                 <name>${jooq.generator.db.dialect}</name>
                 <!-- Include all tables found from the PUBLIC schema -->
-                <includes>tbl_image|tbl_imagedetails|tbl_imageinfo</includes>
+                <includes>tbl_image|tbl_imagedetails|tbl_imageinfo|student_info</includes>
                 <excludes></excludes>
                 <inputSchema>public</inputSchema>
             </database>

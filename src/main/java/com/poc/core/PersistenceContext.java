@@ -1,7 +1,5 @@
 package com.poc.core;
 
-import java.util.Properties;
-
 import javax.sql.DataSource;
 
 import org.jooq.SQLDialect;
@@ -21,8 +19,7 @@ import org.springframework.jdbc.datasource.LazyConnectionDataSourceProxy;
 import org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
+import com.jolbox.bonecp.BoneCPDataSource;
 
 /**
  * 
@@ -37,44 +34,23 @@ public class PersistenceContext {
     private static final String PROPERTY_NAME_DB_PASSWORD = "db.password";
     private static final String PROPERTY_NAME_DB_USERNAME = "db.username";
     private static final String PROPERTY_NAME_DB_URL = "db.url";
+    private static final String PROPERTY_NAME_DB_DRIVER = "db.driver";
     
-    private static final String PROPERTY_NAME_DB_DATASOURCECLASSNAME = "db.dataSourceClassName";
     private static final String PROPERTY_NAME_JOOQ_SQL_DIALECT = "jooq.sql.dialect";
-    
-    private static final String PROPERTY_NAME_MAXPOOL = "db.maximumPoolSize";
-    private static final String PROPERTY_NAME_MIN_IDLE = "db.minimumIdle";
-    private static final String PROPERTY_NAME_CONNECTIONTIMEOUT = "db.connectionTimeout";
-    private static final String PROPERTY_NAME_IDLETIMEOUT = "db.idleTimeout";
-    
+
     @Autowired
     private Environment env;
     
     @Bean(destroyMethod = "close")
     public DataSource dataSource() {
-
-		Properties dsProps = new Properties();
-		dsProps.put("url", env.getRequiredProperty(PROPERTY_NAME_DB_URL));
-		dsProps.put("user", env.getRequiredProperty(PROPERTY_NAME_DB_USERNAME));
-		dsProps.put("password", env.getRequiredProperty(PROPERTY_NAME_DB_PASSWORD));
-		
-		Properties configProps = new Properties();
-		configProps.put("dataSourceClassName",env.getRequiredProperty(PROPERTY_NAME_DB_DATASOURCECLASSNAME));
-		configProps.put("poolName","SpringBootHikariCP");
-		configProps.put("maximumPoolSize",env.getRequiredProperty(PROPERTY_NAME_MAXPOOL));
-		configProps.put("minimumIdle",env.getRequiredProperty(PROPERTY_NAME_MIN_IDLE));
-		configProps.put("connectionTimeout", env.getRequiredProperty(PROPERTY_NAME_CONNECTIONTIMEOUT));
-		configProps.put("idleTimeout", env.getRequiredProperty(PROPERTY_NAME_IDLETIMEOUT));
-		configProps.put("dataSourceProperties", dsProps);
-		   
-		HikariConfig hc = new HikariConfig(configProps);
-		HikariDataSource ds = new HikariDataSource(hc);
-		    
-		ds.addDataSourceProperty("cachePrepStmts", true);
-		ds.addDataSourceProperty("prepStmtCacheSize", 250);
-		ds.addDataSourceProperty("prepStmtCacheSqlLimit", 2048);
-		ds.addDataSourceProperty("useServerPrepStmts", true);
-       
-        return ds;
+        BoneCPDataSource dataSource = new BoneCPDataSource();
+ 
+        dataSource.setDriverClass(env.getRequiredProperty(PROPERTY_NAME_DB_DRIVER));
+        dataSource.setJdbcUrl(env.getRequiredProperty(PROPERTY_NAME_DB_URL));
+        dataSource.setUsername(env.getRequiredProperty(PROPERTY_NAME_DB_USERNAME));
+        dataSource.setPassword(env.getRequiredProperty(PROPERTY_NAME_DB_PASSWORD));
+ 
+        return dataSource;
     }
     
     @Bean
