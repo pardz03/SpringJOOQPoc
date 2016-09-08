@@ -1,4 +1,4 @@
-package com.poc.domain;
+package com.poc.dao.domainfactory;
 
 import org.jooq.Record;
 import org.modelmapper.ModelMapper;
