@@ -2,6 +2,7 @@ package com.poc.dao;
 
 import static com.poc.db.tables.TblImage.TBL_IMAGE;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.jooq.DSLContext;
@@ -11,12 +12,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.poc.domain.DomainFactory;
+import com.poc.model.Image;
+
+@SuppressWarnings("rawtypes")
 @Repository
 @Transactional
-public class ImageRepository {
+public class ImageRepository extends BaseRepository{
 	
 	@Autowired
-	private DSLContext jooq;
+	DomainFactory<Image> imageFactory;
 	
 	public void select(){
 		SelectQuery<Record> selectQuery = jooq.selectQuery();
@@ -25,6 +30,14 @@ public class ImageRepository {
 		selectQuery.addSelect(TBL_IMAGE.PATH.as("path"));
 		selectQuery.addFrom(TBL_IMAGE);
 		List<Record> results = selectQuery.fetch();
+
+		List<Image> image = new ArrayList<Image>();
+		
+		for(Record r : results){
+			Image i = imageFactory.make(r, Image.class);
+			image.add(i);
+		}
+
 		System.out.println(results);
 	}
 }
