@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.poc.dao.domainfactory.DomainFactory;
+import com.poc.dao.factory.DomainFactory;
 import com.poc.dao.gateway.ImageGateway;
 import com.poc.dto.DataTransferObject;
 import com.poc.model.Image;
