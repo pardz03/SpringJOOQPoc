@@ -9,6 +9,7 @@ import com.poc.model.Image;
 public class DataTransferObject {
 	private List<Record> results;
 	private List<Image> imagelist;
+	private Image image;
 
 	public List<Record> getResults() {
 		return results;
@@ -24,5 +25,13 @@ public class DataTransferObject {
 
 	public void setImagelist(List<Image> imagelist) {
 		this.imagelist = imagelist;
+	}
+
+	public Image getImage() {
+		return image;
+	}
+
+	public void setImage(Image image) {
+		this.image = image;
 	}
 }

@@ -10,8 +10,8 @@ public interface ImageService {
 	void saveImageDetails(DataTransferObject dto);
 	void updateImage(DataTransferObject dto);
 	void updateImageDetails(DataTransferObject dto);
-	void insertImage(DataTransferObject dto);
-	void insertImageDetails(DataTransferObject dto);
+	void deleteImage(DataTransferObject dto);
+	void deleteImageDetails(DataTransferObject dto);
 	DataTransferObject selectImage(DataTransferObject dto);
 	DataTransferObject selectImageDetails(DataTransferObject dto);
 }

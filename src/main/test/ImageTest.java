@@ -11,7 +11,7 @@ public class ImageTest extends BaseTestRunner{
 	@Autowired
 	private ImageService iservice;
 	
-	@Test
+
 	public void testImage(){
 		DataTransferObject dto = new DataTransferObject();
 		DataTransferObject fetchResult = iservice.selectImage(dto);
@@ -21,5 +21,35 @@ public class ImageTest extends BaseTestRunner{
 			System.out.println(i.getName());
 			System.out.println(i.getPath());
 		}
+	}
+	
+
+	public void testImageSave(){
+		DataTransferObject dto = new DataTransferObject();
+		Image i = new Image();
+		i.setName("JOOQ SAVE2");
+		i.setPath("JOOQ PATH2");
+		dto.setImage(i);
+		iservice.saveImage(dto);
+	}
+	
+
+	public void testImageUpdate(){
+		DataTransferObject dto = new DataTransferObject();
+		Image i = new Image();
+		i.setName("JOOQ updatename");
+		i.setPath("JOOQ UPDATEPATH");
+		i.setId("24");
+		dto.setImage(i);
+		iservice.updateImage(dto);
+	}
+	
+	@Test
+	public void testDeleteImage(){
+		DataTransferObject dto = new DataTransferObject();
+		Image i = new Image();
+		i.setId("25");
+		dto.setImage(i);
+		iservice.deleteImage(dto);
 	}
 }

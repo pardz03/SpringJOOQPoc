@@ -16,7 +16,7 @@ public class ImageServiceImpl implements ImageService{
 	@Override
 	public void saveImage(DataTransferObject dto) {
 		// TODO Auto-generated method stub
-
+		imageRepo.saveImage(dto);
 	}
 
 	@Override
@@ -28,7 +28,7 @@ public class ImageServiceImpl implements ImageService{
 	@Override
 	public void updateImage(DataTransferObject dto) {
 		// TODO Auto-generated method stub
-		
+		imageRepo.updateImage(dto);
 	}
 
 	@Override
@@ -38,13 +38,13 @@ public class ImageServiceImpl implements ImageService{
 	}
 
 	@Override
-	public void insertImage(DataTransferObject dto) {
+	public void deleteImage(DataTransferObject dto) {
 		// TODO Auto-generated method stub
-		
+		imageRepo.deleteImage(dto);
 	}
 
 	@Override
-	public void insertImageDetails(DataTransferObject dto) {
+	public void deleteImageDetails(DataTransferObject dto) {
 		// TODO Auto-generated method stub
 		
 	}

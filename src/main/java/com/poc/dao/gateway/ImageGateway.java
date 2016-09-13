@@ -8,6 +8,7 @@ import org.jooq.Record;
 import org.jooq.SelectQuery;
 import org.springframework.stereotype.Component;
 
+import com.poc.db.tables.records.TblImageRecord;
 import com.poc.dto.DataTransferObject;
 
 @Component
@@ -16,19 +17,28 @@ public class ImageGateway extends BaseGateway{
 	@Override
 	public void insert(DataTransferObject dto) {
 		// TODO Auto-generated method stub
+		TblImageRecord record = new TblImageRecord();
+		record.setName(dto.getImage().getName());
+		record.setPath(dto.getImage().getPath());
 		
+		jooq.insertInto(TBL_IMAGE).set(record).returning().fetchOne();
 	}
 
 	@Override
 	public void update(DataTransferObject dto) {
 		// TODO Auto-generated method stub
-		
+		jooq.update(TBL_IMAGE)
+		.set(TBL_IMAGE.NAME,dto.getImage().getName())
+		.set(TBL_IMAGE.PATH,dto.getImage().getPath())
+		.where(TBL_IMAGE.ID_IMAGE.in(Integer.parseInt(dto.getImage().getId())))
+		.execute();
 	}
 
 	@Override
 	public void delete(DataTransferObject dto) {
 		// TODO Auto-generated method stub
-		
+		jooq.delete(TBL_IMAGE).where(TBL_IMAGE.ID_IMAGE.eq(Integer.parseInt(dto.getImage().getId())))
+		.execute();
 	}
 
 	@Override

@@ -35,4 +35,16 @@ public class ImageRepository {
 
 		return fetchResult;
 	}
+	
+	public void saveImage(DataTransferObject dto){
+		imgGateway.insert(dto);
+	}
+	
+	public void deleteImage(DataTransferObject dto){
+		imgGateway.delete(dto);
+	}
+	
+	public void updateImage(DataTransferObject dto){
+		imgGateway.update(dto);
+	}
 }
