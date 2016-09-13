@@ -5,6 +5,12 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * 
+ * @author jay
+ *	this class is used for fetching data via jooq converts plain result into object
+ * @param <T>
+ */
 @Component
 public class DomainFactory<T> {
 	
