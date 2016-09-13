@@ -58,7 +58,7 @@ public class ImageServiceImpl implements ImageService{
 	@Override
 	public DataTransferObject selectImageDetails(DataTransferObject dto) {
 		// TODO Auto-generated method stub
-		return null;
+		return imageRepo.selectFullImageDetails(dto);
 	}
 
 }

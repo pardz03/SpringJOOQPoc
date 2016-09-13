@@ -3,6 +3,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.poc.dao.repository.ImageRepository;
 import com.poc.dto.DataTransferObject;
+import com.poc.model.FullImageDetails;
 import com.poc.model.Image;
 import com.poc.service.ImageService;
 
@@ -44,12 +45,27 @@ public class ImageTest extends BaseTestRunner{
 		iservice.updateImage(dto);
 	}
 	
-	@Test
+
 	public void testDeleteImage(){
 		DataTransferObject dto = new DataTransferObject();
 		Image i = new Image();
 		i.setId("25");
 		dto.setImage(i);
 		iservice.deleteImage(dto);
+	}
+	
+	@Test
+	public void testFetchFullDetails(){
+		DataTransferObject dto = new DataTransferObject();
+		Image i = new Image();
+		i.setId("25");
+		dto.setImage(i);
+		DataTransferObject fetchResult = iservice.selectImageDetails(dto);
+		
+		for(FullImageDetails fullDetails : fetchResult.getFullImageDetails()){
+			System.out.println(fullDetails.getName());
+			System.out.println(fullDetails.getPath());
+			System.out.println(fullDetails.getComment());
+		}
 	}
 }

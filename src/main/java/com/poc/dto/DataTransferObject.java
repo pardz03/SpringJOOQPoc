@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.jooq.Record;
 
+import com.poc.model.FullImageDetails;
 import com.poc.model.Image;
 
 public class DataTransferObject {
 	private List<Record> results;
 	private List<Image> imagelist;
+	private List<FullImageDetails> fullImageDetails;
 	private Image image;
 
 	public List<Record> getResults() {
@@ -33,5 +35,13 @@ public class DataTransferObject {
 
 	public void setImage(Image image) {
 		this.image = image;
+	}
+
+	public List<FullImageDetails> getFullImageDetails() {
+		return fullImageDetails;
+	}
+
+	public void setFullImageDetails(List<FullImageDetails> fullImageDetails) {
+		this.fullImageDetails = fullImageDetails;
 	}
 }

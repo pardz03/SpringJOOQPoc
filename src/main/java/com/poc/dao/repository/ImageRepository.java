@@ -8,8 +8,10 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.poc.dao.factory.DomainFactory;
+import com.poc.dao.gateway.ImageFullDetailsGateway;
 import com.poc.dao.gateway.ImageGateway;
 import com.poc.dto.DataTransferObject;
+import com.poc.model.FullImageDetails;
 import com.poc.model.Image;
 
 @Repository
@@ -20,7 +22,13 @@ public class ImageRepository {
 	DomainFactory<Image> imageFactory;
 	
 	@Autowired
+	DomainFactory<FullImageDetails> fullImageDetailsFactory;
+	
+	@Autowired
 	ImageGateway imgGateway;
+	
+	@Autowired 
+	ImageFullDetailsGateway imageFullDetailsGateway;
 	
 	public DataTransferObject selectImage(DataTransferObject dto){
 
@@ -46,5 +54,17 @@ public class ImageRepository {
 	
 	public void updateImage(DataTransferObject dto){
 		imgGateway.update(dto);
+	}
+	
+	public DataTransferObject selectFullImageDetails(DataTransferObject dto){
+		DataTransferObject fetchResult = imageFullDetailsGateway.fetch(dto);
+		
+		List<FullImageDetails> image = new ArrayList<FullImageDetails>();
+		for(Record r : fetchResult.getResults()){
+			FullImageDetails i = fullImageDetailsFactory.make(r, FullImageDetails.class);
+			image.add(i);
+		}
+		fetchResult.setFullImageDetails(image);
+		return fetchResult;
 	}
 }
