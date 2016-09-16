@@ -16,4 +16,5 @@ public interface ImageService {
 	DataTransferObject selectImageDetails(DataTransferObject dto);
 	
 	DataTransferObject subSelectExample(DataTransferObject dto);
+	DataTransferObject joinAndLeftJoinUsingSelectQuery(DataTransferObject dto);
 }

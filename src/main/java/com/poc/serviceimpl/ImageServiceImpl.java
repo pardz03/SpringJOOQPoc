@@ -67,4 +67,11 @@ public class ImageServiceImpl implements ImageService{
 		return imageRepo.subSelectExample(dto);
 	}
 
+	@Override
+	public DataTransferObject joinAndLeftJoinUsingSelectQuery(
+			DataTransferObject dto) {
+		// TODO Auto-generated method stub
+		return imageRepo.joinAndLeftJoinUsingSelectQuery(dto);
+	}
+
 }

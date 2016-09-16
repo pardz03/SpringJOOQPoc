@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.poc.dao.factory.DomainFactory;
 import com.poc.dao.gateway.ImageFullDetailsGateway;
 import com.poc.dao.gateway.ImageGateway;
+import com.poc.dao.gateway.ImageJoinAndLeftJoinUsingSelectQueryGateway;
 import com.poc.dao.gateway.ImageSubSelectExampleGateway;
 import com.poc.dto.DataTransferObject;
 import com.poc.model.FullImageDetails;
@@ -33,6 +34,9 @@ public class ImageRepository {
 	
 	@Autowired
 	ImageSubSelectExampleGateway imageSubSelectExampleGateway;
+	
+	@Autowired
+	ImageJoinAndLeftJoinUsingSelectQueryGateway joinGateway;
 	
 	public DataTransferObject selectImage(DataTransferObject dto){
 
@@ -74,6 +78,17 @@ public class ImageRepository {
 	
 	public DataTransferObject subSelectExample(DataTransferObject dto){
 		DataTransferObject fetchResult = imageSubSelectExampleGateway.fetch(dto);
+		List<FullImageDetails> image = new ArrayList<FullImageDetails>();
+		for(Record r : fetchResult.getResults()){
+			FullImageDetails i = fullImageDetailsFactory.make(r, FullImageDetails.class);
+			image.add(i);
+		}
+		fetchResult.setFullImageDetails(image);
+		return fetchResult;
+	}
+	
+	public DataTransferObject joinAndLeftJoinUsingSelectQuery(DataTransferObject dto){
+		DataTransferObject fetchResult = joinGateway.fetch(dto);
 		List<FullImageDetails> image = new ArrayList<FullImageDetails>();
 		for(Record r : fetchResult.getResults()){
 			FullImageDetails i = fullImageDetailsFactory.make(r, FullImageDetails.class);
