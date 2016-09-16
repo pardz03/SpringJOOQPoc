@@ -59,9 +59,7 @@ public class ImageSubSelectExampleGateway extends BaseGateway{
 				.where(TBL_IMAGEINFO.ID_IMAGE.in(id_image))
 				.fetch();
 		
-		DataTransferObject returnDTO = new DataTransferObject();
-		returnDTO.setResults(results);
-		return returnDTO;
+		return super.setResults(results);
 	}
 
 }

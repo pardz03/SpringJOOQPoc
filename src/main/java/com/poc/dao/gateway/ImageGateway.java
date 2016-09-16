@@ -49,11 +49,8 @@ public class ImageGateway extends BaseGateway{
 		selectQuery.addSelect(TBL_IMAGE.NAME.as("name"));
 		selectQuery.addSelect(TBL_IMAGE.PATH.as("path"));
 		selectQuery.addFrom(TBL_IMAGE);
-		List<Record> results = selectQuery.fetch();
-		
-		DataTransferObject returnDto = new DataTransferObject();
-		returnDto.setResults(results);
-		return returnDto;
+		List<Record> results = selectQuery.fetch();	
+		return super.setResults(results);
 	}
 
 }

@@ -42,9 +42,7 @@ public class ImageFullDetailsGateway extends BaseGateway{
 		.leftOuterJoin(TBL_IMAGEINFO).on(TBL_IMAGE.ID_IMAGE.eq(TBL_IMAGEINFO.ID_IMAGE))
 		.leftOuterJoin(TBL_IMAGEDETAILS).on(TBL_IMAGEDETAILS.ID_DETAILS.eq(TBL_IMAGEINFO.ID_DETAILS))
 		.fetch();
-		DataTransferObject returnDTO = new DataTransferObject();
-		returnDTO.setResults(results);
-		return returnDTO;
+		return super.setResults(results);
 	}
 
 }

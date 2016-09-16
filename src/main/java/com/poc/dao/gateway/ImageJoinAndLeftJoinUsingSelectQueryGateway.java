@@ -54,9 +54,7 @@ public class ImageJoinAndLeftJoinUsingSelectQueryGateway extends BaseGateway{
 		selectQuery.addJoin(TBL_IMAGEDETAILS, TBL_IMAGEINFO.ID_DETAILS.eq(TBL_IMAGEDETAILS.ID_DETAILS));
 		List<Record> results = selectQuery.fetch();
 		
-		DataTransferObject returnDTO = new DataTransferObject();
-		returnDTO.setResults(results);
-		return returnDTO;
+		return super.setResults(results);
 	}
 
 }
