@@ -14,4 +14,6 @@ public interface ImageService {
 	void deleteImageDetails(DataTransferObject dto);
 	DataTransferObject selectImage(DataTransferObject dto);
 	DataTransferObject selectImageDetails(DataTransferObject dto);
+	
+	DataTransferObject subSelectExample(DataTransferObject dto);
 }

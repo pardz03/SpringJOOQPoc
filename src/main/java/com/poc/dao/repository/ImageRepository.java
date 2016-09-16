@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.poc.dao.factory.DomainFactory;
 import com.poc.dao.gateway.ImageFullDetailsGateway;
 import com.poc.dao.gateway.ImageGateway;
+import com.poc.dao.gateway.ImageSubSelectExampleGateway;
 import com.poc.dto.DataTransferObject;
 import com.poc.model.FullImageDetails;
 import com.poc.model.Image;
@@ -29,6 +30,9 @@ public class ImageRepository {
 	
 	@Autowired 
 	ImageFullDetailsGateway imageFullDetailsGateway;
+	
+	@Autowired
+	ImageSubSelectExampleGateway imageSubSelectExampleGateway;
 	
 	public DataTransferObject selectImage(DataTransferObject dto){
 
@@ -67,4 +71,16 @@ public class ImageRepository {
 		fetchResult.setFullImageDetails(image);
 		return fetchResult;
 	}
+	
+	public DataTransferObject subSelectExample(DataTransferObject dto){
+		DataTransferObject fetchResult = imageSubSelectExampleGateway.fetch(dto);
+		List<FullImageDetails> image = new ArrayList<FullImageDetails>();
+		for(Record r : fetchResult.getResults()){
+			FullImageDetails i = fullImageDetailsFactory.make(r, FullImageDetails.class);
+			image.add(i);
+		}
+		fetchResult.setFullImageDetails(image);
+		return fetchResult;
+	}
+
 }

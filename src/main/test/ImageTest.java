@@ -54,7 +54,7 @@ public class ImageTest extends BaseTestRunner{
 		iservice.deleteImage(dto);
 	}
 	
-	@Test
+
 	public void testFetchFullDetails(){
 		DataTransferObject dto = new DataTransferObject();
 		Image i = new Image();
@@ -65,6 +65,19 @@ public class ImageTest extends BaseTestRunner{
 		for(FullImageDetails fullDetails : fetchResult.getFullImageDetails()){
 			System.out.println(fullDetails.getName());
 			System.out.println(fullDetails.getPath());
+			System.out.println(fullDetails.getComment());
+		}
+	}
+	
+	@Test
+	public void testSubselect(){
+		DataTransferObject dto = new DataTransferObject();
+		Image i = new Image();
+		i.setId("22");
+		dto.setImage(i);
+		DataTransferObject fetchResult = iservice.subSelectExample(dto);
+		
+		for(FullImageDetails fullDetails : fetchResult.getFullImageDetails()){
 			System.out.println(fullDetails.getComment());
 		}
 	}
