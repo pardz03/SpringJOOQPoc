@@ -22,7 +22,7 @@ public class ImageServiceImpl implements ImageService{
 	@Override
 	public void saveImageDetails(DataTransferObject dto) {
 		// TODO Auto-generated method stub
-		
+		imageRepo.insertImageDetails(dto);
 	}
 
 	@Override

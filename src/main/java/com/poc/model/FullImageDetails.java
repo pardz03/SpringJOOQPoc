@@ -1,6 +1,8 @@
 package com.poc.model;
 
 public class FullImageDetails {
+	private int imageId;
+	private int imageDetailsId;
 	private String name;
 	private String path;
 	private String comment;
@@ -24,5 +26,21 @@ public class FullImageDetails {
 	}
 	public void setComment(String comment) {
 		this.comment = comment;
+	}
+
+	public int getImageId() {
+		return imageId;
+	}
+
+	public void setImageId(int imageId) {
+		this.imageId = imageId;
+	}
+
+	public int getImageDetailsId() {
+		return imageDetailsId;
+	}
+
+	public void setImageDetailsId(int imageDetailsId) {
+		this.imageDetailsId = imageDetailsId;
 	}
 }

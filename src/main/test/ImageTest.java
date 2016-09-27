@@ -1,6 +1,7 @@
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.poc.dao.gateway.ImageDetailsGateway;
 import com.poc.dao.repository.ImageRepository;
 import com.poc.dto.DataTransferObject;
 import com.poc.model.FullImageDetails;
@@ -11,7 +12,6 @@ import com.poc.service.ImageService;
 public class ImageTest extends BaseTestRunner{
 	@Autowired
 	private ImageService iservice;
-	
 
 	public void testImage(){
 		DataTransferObject dto = new DataTransferObject();
@@ -35,6 +35,17 @@ public class ImageTest extends BaseTestRunner{
 	}
 	
 
+	public void insertImageDetails(){
+		DataTransferObject dto = new DataTransferObject();
+		FullImageDetails id = new FullImageDetails();
+		id.setImageId(1);
+		id.setComment("here is my comment number 1");
+		dto.setFullImageDetail(id);
+		
+		iservice.saveImageDetails(dto);
+	}
+	
+
 	public void testImageUpdate(){
 		DataTransferObject dto = new DataTransferObject();
 		Image i = new Image();
@@ -54,7 +65,7 @@ public class ImageTest extends BaseTestRunner{
 		iservice.deleteImage(dto);
 	}
 	
-
+	@Test
 	public void testFetchFullDetails(){
 		DataTransferObject dto = new DataTransferObject();
 		Image i = new Image();
@@ -82,7 +93,7 @@ public class ImageTest extends BaseTestRunner{
 		}
 	}
 	
-	@Test
+
 	public void joinAndLeftJoinUsingSelectQuery(){
 		DataTransferObject fetchResult = iservice.joinAndLeftJoinUsingSelectQuery(new DataTransferObject());
 		

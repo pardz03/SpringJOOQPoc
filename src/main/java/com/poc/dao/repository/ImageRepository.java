@@ -8,10 +8,13 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.poc.dao.factory.DomainFactory;
+import com.poc.dao.gateway.ImageDetailsGateway;
 import com.poc.dao.gateway.ImageFullDetailsGateway;
 import com.poc.dao.gateway.ImageGateway;
+import com.poc.dao.gateway.ImageInfoGateway;
 import com.poc.dao.gateway.ImageJoinAndLeftJoinUsingSelectQueryGateway;
 import com.poc.dao.gateway.ImageSubSelectExampleGateway;
+import com.poc.db.tables.records.TblImagedetailsRecord;
 import com.poc.dto.DataTransferObject;
 import com.poc.model.FullImageDetails;
 import com.poc.model.Image;
@@ -34,6 +37,12 @@ public class ImageRepository {
 	
 	@Autowired
 	ImageSubSelectExampleGateway imageSubSelectExampleGateway;
+	
+	@Autowired
+	ImageInfoGateway imageInfoGateway;
+	
+	@Autowired
+	ImageDetailsGateway imageDetailsGateway;
 	
 	@Autowired
 	ImageJoinAndLeftJoinUsingSelectQueryGateway joinGateway;
@@ -98,4 +107,10 @@ public class ImageRepository {
 		return fetchResult;
 	}
 
+	public void insertImageDetails(DataTransferObject dto){
+		imageDetailsGateway.insert(dto);
+		FullImageDetails fullImageDetail = dto.getFullImageDetail();
+		fullImageDetail.setImageDetailsId(dto.getImagedetailRecordResult().getIdDetails());
+		imageInfoGateway.insert(dto);
+	}
 }
