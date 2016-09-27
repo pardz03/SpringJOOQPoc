@@ -8,7 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.poc.dto.DataTransferObject;
-
+/**
+ * 
+ * @author joliveros
+ *	all gateway must extends this parent class
+ */
 @Repository
 public abstract class BaseGateway {
 	@Autowired
