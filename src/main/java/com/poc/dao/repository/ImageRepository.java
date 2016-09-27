@@ -107,6 +107,11 @@ public class ImageRepository {
 		return fetchResult;
 	}
 
+	
+	/**
+	 * this method is used to insert connecting tables
+	 * ex. imageinfo<imagedetails
+	 */
 	public void insertImageDetails(DataTransferObject dto){
 		imageDetailsGateway.insert(dto);
 		FullImageDetails fullImageDetail = dto.getFullImageDetail();
