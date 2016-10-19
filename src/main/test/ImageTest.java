@@ -24,7 +24,7 @@ public class ImageTest extends BaseTestRunner{
 		}
 	}
 	
-
+	@Test
 	public void testImageSave(){
 		DataTransferObject dto = new DataTransferObject();
 		Image i = new Image();
@@ -65,7 +65,7 @@ public class ImageTest extends BaseTestRunner{
 		iservice.deleteImage(dto);
 	}
 	
-	@Test
+
 	public void testFetchFullDetails(){
 		DataTransferObject dto = new DataTransferObject();
 		Image i = new Image();
